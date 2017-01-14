@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>javascript</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="assert.js"></script>
+  </head>
+
+  <body>
+    <pre id="console">
+      <script>
+'use strict';
+
+// The problem:
+//   - inputs
+//     - arg 1: "string", String
+//       - if not String, convert to String
+//   - outputs
+//     - new String
+//   - rules
+//     - create a new String from "string"
+//     - starting at index 0, make every other character uppercase
+//     - starting at index 1, make every other character lowercase
+//     - don't change non-alpha characters, but count them
+//
+// Examples/Test cases:
+//   - Happy path tests
+//     - staggeredCase('I Love Launch School!')     -> 'I LoVe lAuNcH ScHoOl!'
+//     - staggeredCase('ALL_CAPS')                  -> 'AlL_CaPs'
+//     - staggeredCase('ignore 77 the 444 numbers') ->
+//       'IgNoRe 77 ThE 444 NuMbErS'
+//   - Edge case tests
+//     - staggeredCase('') -> ''
+//     - staggeredCase('a') -> 'A'
+//     - staggeredCase('A') -> 'A'
+//
+// Data structure
+//   - inputs: String
+//   - rules: Array of String (characters)
+//   - outputs: String
+//
+// Algorithm
+//   - split "string" into Array of characters
+//   - map Array and index
+//     - if index is even, transform to uppercase
+//     - if index is odd, transform to lowercase
+//   - join array into String
+
+function staggeredCase(string) {
+  function isEven(number) {
+    return number % 2 === 0;
+  }
+
+  var characters = string.split('').map(
+    function (character, index) {
+      return isEven(index) ? character.toUpperCase() : character.toLowerCase();
+    }
+  );
+
+  return characters.join('');
+}
+
+// test cases
+/* global show, log, theEnd */
+log(staggeredCase('I Love Launch School!'), 'I LoVe lAuNcH ScHoOl!');
+log(staggeredCase('ALL_CAPS'), 'AlL_CaPs');
+log(staggeredCase('ignore 77 the 444 numbers'), 'IgNoRe 77 ThE 444 NuMbErS');
+log(staggeredCase(''), '');
+log(staggeredCase('a'), 'A');
+log(staggeredCase('A'), 'A');
+theEnd();
+      </script>
+    </pre>
+  </body>
+</html>

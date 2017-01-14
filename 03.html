@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>javascript</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="assert.js"></script>
+  </head>
+
+  <body>
+    <pre id="console">
+      <script>
+'use strict';
+
+// The problem:
+//   - inputs
+//     - arg 1: "string", String
+//       - assume valid
+//       - may be empty
+//   - outputs
+//     - Object: {
+//         countLowercase: Number (integer >= 0)
+//         countUppercase: Number (integer >= 0)
+//         countNeither:   Number (integer >= 0)
+//       }
+//   - rules
+//     - count lowercase, uppercase, neither characters and record in return
+//       Object
+//
+// Examples/Test cases:
+//   - Happy path tests
+//     - letterCaseCount('abCdef 123') ->
+//       { lowercase: 5, uppercase: 1, neither: 4 }
+//     - letterCaseCount('AbCd +Ef') ->
+//       { lowercase: 3, uppercase: 3, neither: 2 }
+//     - letterCaseCount('123') ->
+//       { lowercase: 0, uppercase: 0, neither: 3 }
+//   - Edge case tests
+//     - letterCaseCount('') ->
+//       { lowercase: 0, uppercase: 0, neither: 0 }
+//
+// Data structure
+//   - inputs:
+//   - rules:
+//   - outputs:
+//
+// Algorithm
+//   - split string into array of characters
+//   - reduce characters
+
+function letterCaseCount(string) {
+  function isLower(character) {
+    return character >= 'a' && character <= 'z';
+  }
+
+  function isUpper(character) {
+    return character >= 'A' && character <= 'Z';
+  }
+
+  return string.split('').reduce(
+    function (counts, character) {
+      if (isLower(character)) {
+        counts.lowercase += 1;
+      } else if (isUpper(character)) {
+        counts.uppercase += 1;
+      } else {
+        counts.neither += 1;
+      }
+
+      return counts;
+    },
+    {
+      lowercase: 0,
+      uppercase: 0,
+      neither: 0,
+    }
+  );
+}
+
+// test cases
+/* global show, log, theEnd */
+log(letterCaseCount('abCdef 123'), { lowercase: 5, uppercase: 1, neither: 4 });
+log(letterCaseCount('AbCd +Ef'),   { lowercase: 3, uppercase: 3, neither: 2 });
+log(letterCaseCount('123'),        { lowercase: 0, uppercase: 0, neither: 3 });
+log(letterCaseCount(''),           { lowercase: 0, uppercase: 0, neither: 0 });
+theEnd();
+      </script>
+    </pre>
+  </body>
+</html>

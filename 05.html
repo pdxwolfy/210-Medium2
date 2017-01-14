@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>javascript</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="assert.js"></script>
+  </head>
+
+  <body>
+    <pre id="console">
+      <script>
+'use strict';
+
+// The problem:
+//   - inputs
+//     - arg 1: "string", String
+//       - assume always a String
+//   - outputs
+//     - a new String
+//   - rules
+//     - new String is a copy of "string"
+//     - all uppercase characters in "string" are lowercase in new String
+//     - all lowercase characters in "string" are uppercase in new String
+//     - all other characters in "string" are identical in new String
+//     - assume ASCII character set with US Latin alphabet
+//
+// Examples/Test cases:
+//   - Happy path tests
+//     - swapcase('CamelCase')         -> 'cAMELcASE'
+//     - swapcase('Tonight on XYZ-TV') -> 'tONIGHT ON xyz-tv'
+//   - Edge case tests
+//     - swapcase('')                  -> ''
+//     - swapcase('X')                 -> 'x'
+//     - swapcase('y')                 -> 'Y'
+//     - swapcase('3')                 -> '3'
+//
+// Data structure
+//   - inputs: String
+//   - rules: Array
+//   - outputs: String
+//
+// Algorithm
+//   - split string into array of characters
+//   - map:
+//     - lowercase characters to uppercase
+//     - uppercase characters to lowercase
+//     - non-alpha characters stay as-is
+//   - join array into String
+
+
+function swapcase(string) {
+  function isLowerCase(character) {
+    return character >= 'a' && character <= 'z';
+  }
+
+  function isUpperCase(character) {
+    return character >= 'A' && character <= 'Z';
+  }
+
+  function toLowerCase(character) {
+    return character.toLowerCase();
+  }
+
+  function toUpperCase(character) {
+    return character.toUpperCase();
+  }
+
+  function toggleCase(character) {
+    if (isLowerCase(character)) {
+      return toUpperCase(character);
+    } else if (isUpperCase(character)) {
+      return toLowerCase(character);
+    } else {
+      return character;
+    }
+  }
+
+  return string.split('').map(toggleCase).join('');
+}
+
+// test cases
+/* global show, log, theEnd */
+log(swapcase('CamelCase'), 'cAMELcASE');
+log(swapcase('Tonight on XYZ-TV'), 'tONIGHT ON xyz-tv');
+log(swapcase(''), '');
+log(swapcase('X'), 'x');
+log(swapcase('y'), 'Y');
+log(swapcase('3'), '3');
+theEnd();
+      </script>
+    </pre>
+  </body>
+</html>

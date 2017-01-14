@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>javascript</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="assert.js"></script>
+  </head>
+
+  <body>
+    <pre id="console">
+      <script>
+'use strict';
+
+// The problem:
+//   - terms/concepts
+//     - word: a string of consecutive non-space characters delimited by spaces
+//             or the string boundaries
+//   - inputs
+//     - arg 1: "string", String
+//       - assume it is always a String
+//   - outputs
+//     - new Array of new Strings
+//   - rules
+//     - for each non-empty word in "string"
+//       - append a space and the length of word to word
+//       - put result in Array
+//
+// Examples/Test cases:
+//   - Happy path tests
+//     - wordLengths('cow sheep chicken') -> ['cow 3', 'sheep 5', 'chicken 7']
+//     - wordLengths('baseball hot dogs and apple pie') ->
+//        ['baseball 8', 'hot 3', 'dogs 4', 'and 3', 'apple 5', 'pie 3']
+//     - wordLengths('It ain\'t easy, is it?') ->
+//        ['It 2', 'ain\'t 5', 'easy, 5', 'is 2', 'it? 3']
+//   - Edge case tests
+//     - wordLengths('Supercalifragilisticexpialidocious')
+//        ['Supercalifragilisticexpialidocious 34']
+//     - wordLengths('Four  score   and  seven')
+//        ['Four 4', 'score 5', 'and 3', 'seven 5']
+//     - wordLengths('') -> []
+//
+// Algorithm
+//   - Split "string" into Array of Strings, where each element is a word
+//   - Map Array: append space and word length to word
+
+function wordLengths(string) {
+  if (!string || string.length === 0) {
+    return [];
+  }
+
+  var words = string.split(/ +/);
+  return words.map(
+    function (word) {
+      return word + ' ' + String(word.length);
+    }
+  );
+}
+
+// test cases
+/* global show, log, theEnd */
+log(wordLengths('cow sheep chicken'), ['cow 3', 'sheep 5', 'chicken 7']);
+log(wordLengths('baseball hot dogs and apple pie'),
+    ['baseball 8', 'hot 3', 'dogs 4', 'and 3', 'apple 5', 'pie 3']);
+log(wordLengths('It ain\'t easy, is it?'),
+    ['It 2', 'ain\'t 5', 'easy, 5', 'is 2', 'it? 3']);
+log(wordLengths('Supercalifragilisticexpialidocious'),
+    ['Supercalifragilisticexpialidocious 34']);
+log(wordLengths(''), []);
+theEnd();
+      </script>
+    </pre>
+  </body>
+</html>

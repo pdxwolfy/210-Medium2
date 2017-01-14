@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>javascript</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="assert.js"></script>
+  </head>
+
+  <body>
+    <pre id="console">
+      <script>
+'use strict';
+
+// The problem:
+//   - definitions
+//     - word: a series of consecutive non-blank characters
+//   - inputs
+//     - arg 1: "string", String
+//       - always a string
+//   - outputs
+//     - String
+//   - rules
+//     - capitalize each word in "string"
+//
+// Examples/Test cases:
+//   - Happy path tests
+//     - wordCap('four score and seven')    -> 'Four Score And Seven'
+//     - wordCap('the javaScript language') -> 'The Javascript Language'
+//     - wordCap('this is a "quoted" word') -> 'This Is A "quoted" Word'
+//   - Edge case tests
+//     - wordCap('this')                    -> 'This'
+//     - wordCap('THIS')                    -> 'THIS'
+//     - wordCap('a')                       -> 'A'
+//     - wordCap(' abc ')                   -> ' Abc '
+//     - wordCap(' abc   def ')             -> ' Abc   def '
+//     - wordCap('')                        -> ''
+//
+// Data structure
+//   - inputs: String
+//   - rules: Regex
+//   - outputs: String
+//
+// Algorithm
+//   - replace all letters at beginning of a word with uppercase equivalent
+//     - beginning of a word is:
+//       - first non-space character in "string"
+//       - first non-space character after each space in "string"
+
+function wordCap(string) {
+  return string.toLowerCase().replace(
+    /(^[a-z]| [a-z])/g,
+    function (character) {
+      return character.toUpperCase();
+    }
+  );
+}
+
+// test cases
+/* global show, log, theEnd */
+log(wordCap('four score and seven'),    'Four Score And Seven');
+log(wordCap('the javaScript language'), 'The Javascript Language');
+log(wordCap('this is a "quoted" word'), 'This Is A "quoted" Word');
+log(wordCap('this'),                    'This');
+log(wordCap('THIS'),                    'This');
+log(wordCap('a'),                       'A');
+log(wordCap(' abc '),                   ' Abc ');
+log(wordCap(' abc   def '),             ' Abc   Def ');
+log(wordCap(''),                        '');
+theEnd();
+      </script>
+    </pre>
+  </body>
+</html>

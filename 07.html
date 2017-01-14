@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>javascript</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="assert.js"></script>
+  </head>
+
+  <body>
+    <pre id="console">
+      <script>
+'use strict';
+
+// The problem:
+//   - inputs
+//     - arg 1: "string", String
+//       - if not String, convert to String
+//   - outputs
+//     - new String
+//   - rules
+//     - create a new String from "string"
+//     - starting at index 0, make every other letter uppercase
+//     - starting at index 1, make every other letter lowercase
+//
+// Examples/Test cases:
+//   - Happy path tests
+//     - staggeredCase('I Love Launch School!')     -> 'I lOvE lAuNcH sChOoL!'
+//     - staggeredCase('ALL CAPS')                  -> 'AlL cApS'
+//     - staggeredCase('ignore 77 the 444 numbers') ->
+//       'IgNoRe 77 ThE 444 nUmBeRs'
+//   - Edge case tests
+//     - staggeredCase('') -> ''
+//     - staggeredCase('a') -> 'A'
+//     - staggeredCase('A') -> 'A'
+//     - staggeredCase(',a') -> ',A'
+//     - staggeredCase(',A') -> ',A'
+//     - staggeredCase('aa') -> 'Aa'
+//     - staggeredCase('AA') -> 'Aa'
+//     - staggeredCase(',a,a') -> ',A,a'
+//     - staggeredCase(',A,A') -> ',A,a'
+//
+// Data structure
+//   - inputs: String
+//   - rules: Array of String (characters)
+//   - outputs: String
+//
+// Algorithm
+//   - split "string" into Array of characters
+//   -
+//   - map Array and index
+//     - if index is even, transform to uppercase
+//     - if index is odd, transform to lowercase
+//   - join array into String
+
+function staggeredCase(string) {
+  function isAlpha(character) {
+    return (character >= 'a' && character <= 'z') ||
+           (character >= 'A' && character <= 'Z');
+  }
+
+  function setCase(toUpper, character) {
+    return toUpper ? character.toUpperCase() : character.toLowerCase();
+  }
+
+  var toUpper = true;
+
+  function transformCase(character) {
+    var newCharacter = character;
+    if (isAlpha(newCharacter)) {
+      newCharacter = setCase(toUpper, character);
+      toUpper = !toUpper;
+    }
+
+    return newCharacter;
+  }
+
+
+  return String(string).split('').map(transformCase).join('');
+}
+
+// test cases
+/* global show, log, theEnd */
+log(staggeredCase('I Love Launch School!'), 'I lOvE lAuNcH sChOoL!');
+log(staggeredCase('ALL CAPS'), 'AlL cApS');
+log(staggeredCase('ignore 77 the 444 numbers'), 'IgNoRe 77 ThE 444 nUmBeRs');
+log(staggeredCase(''), '');
+log(staggeredCase('a'), 'A');
+log(staggeredCase('A'), 'A');
+log(staggeredCase(',a'), ',A');
+log(staggeredCase(',A'), ',A');
+log(staggeredCase('aa'), 'Aa');
+log(staggeredCase('AA'), 'Aa');
+log(staggeredCase(',a,a'), ',A,a');
+log(staggeredCase(',A,A'), ',A,a');
+theEnd();
+      </script>
+    </pre>
+  </body>
+</html>

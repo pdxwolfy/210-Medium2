@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>javascript</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="assert.js"></script>
+  </head>
+
+  <body>
+    <pre id="console">
+      <script>
+'use strict';
+
+var TEXT = 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?';
+
+// The problem:
+//   - terms/concepts
+//     - word: a string of consecutive non-space characters delimited by spaces
+//             or the string boundaries
+//   - inputs
+//     - arg 1: "word", String
+//     - arg 2: "text", String
+//     - assume that both args are always Strings
+//   - outputs
+//     - Number, number of occurrences of "word" in "text"
+//   - rules
+//     - count and return number of occurrences of "word" in "text"
+//     - equality comparisons are case insensitive
+//
+// Examples/Test cases:
+//   - Happy path tests
+//     - searchWord('sed', TEXT) -> 3
+//     - searchWord('ut', TEXT) -> 4
+//     - searchWord('VEL', TEXT) -> 2
+//     - searchWord('iUrE', TEXT) -> 0
+//   - Edge case tests
+//     - searchWord('ut', '') -> 0
+//     - searchWord('', TEXT) -> 0
+//     - searchWord(' ', TEXT) -> 0
+//     - searchWord('', '  abc   def    ghi  ') -> 0
+//     - searchWord(' ', '  abc   def    ghi  ') -> 0
+//
+// Algorithm
+//   - convert "word" and "text" to lowercase
+//   - split "text" into words
+//   - select words that are equal to "string"
+//   - count selected words
+
+function searchWord(word, text) {
+  var lcWord = word.toLowerCase();
+  var words = text.toLowerCase().split(/ +/);
+  var selected = words.filter(
+    function (thisWord) {
+      return thisWord && thisWord === lcWord;
+    }
+  );
+
+  return selected.length;
+}
+
+// test cases
+/* global show, log, theEnd */
+
+log(searchWord('sed', TEXT), 3);
+log(searchWord('ut', TEXT), 4);
+log(searchWord('VEL', TEXT), 2);
+log(searchWord('iUrE', TEXT), 1);
+log(searchWord('ut', ''), 0);
+log(searchWord('', TEXT), 0);
+log(searchWord(' ', TEXT), 0);
+log(searchWord('', '  abc   def    ghi  '), 0);
+log(searchWord(' ', '  abc   def    ghi  '), 0);
+theEnd();
+      </script>
+    </pre>
+  </body>
+</html>

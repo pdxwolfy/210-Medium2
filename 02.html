@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>javascript</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="assert.js"></script>
+  </head>
+
+  <body>
+    <pre id="console">
+      <script>
+'use strict';
+
+// The problem:
+//   - inputs
+//     - arg 1: "strings", Array of Strings
+//   - outputs
+//     - "strings" with vowels removed from each element
+//   - assumptions
+//     - "strings" is always an Array
+//     - all elements of "strings" are Strings
+//   - rules
+//     - vowels are 'a', 'e', 'i', 'o', and 'u'
+//     - remove both uppercase and lowercase vowels from each String
+//     - don't modify "strings" or any of its elements
+//
+// Examples/Test cases:
+//   - Happy path tests
+//     - removeVowels(['abcdefghijklmnopqrstuvwxyz']) ->
+//         ['bcdfghjklmnpqrstvwxyz']
+//     - removeVowels(['green', 'YELLOW', 'black', 'white']) ->
+//         ['grn', 'YLLW', 'blck', 'wht']
+//     - removeVowels(['ABC', 'AEIOU', 'XYZ']) -> ['BC', '', 'XYZ']
+//     - removeVowels(['abc', 'aeiou', 'xyz']) -> ['bc', '', 'xyz']
+//   - Edge case tests
+//     - removeVowels([]) -> []
+//     - removeVowels(['cwm']) -> ['cwm']
+//     - removeVowels(['', 'ae', 'i', 'OU') -> ['', '', '', '']
+//
+// Data structure
+//   - inputs: Array of Strings
+//   - rules: Array of Strings
+//   - outputs: Array of Strings
+//
+// Algorithm
+//   - map strings: replace all vowels with empty string
+
+function removeVowels(strings) {
+  return strings.map(
+    function (string) {
+      return string.replace(/[aeiou]/ig, '');
+    }
+  );
+}
+
+// test cases
+/* global show, log, theEnd */
+log(removeVowels(['abcdefghijklmnopqrstuvwxyz']), ['bcdfghjklmnpqrstvwxyz']);
+log(removeVowels(['green', 'YELLOW', 'black', 'white']),
+    ['grn', 'YLLW', 'blck', 'wht']);
+log(removeVowels(['ABC', 'AEIOU', 'XYZ']), ['BC', '', 'XYZ']);
+log(removeVowels(['abc', 'aeiou', 'xyz']), ['bc', '', 'xyz']);
+log(removeVowels([]),                      []);
+log(removeVowels(['cwm']),                 ['cwm']);
+log(removeVowels(['', 'ae', 'i', 'OU']),   ['', '', '', '']);
+theEnd();
+      </script>
+    </pre>
+  </body>
+</html>

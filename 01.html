@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>javascript</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="assert.js"></script>
+  </head>
+
+  <body>
+    <pre id="console">
+      <script>
+'use strict';
+
+// The problem:
+//   - inputs
+//     - arg 1: "string", String
+//   - outputs
+//     - Boolean
+//   - assumptions
+//     - assume argument is always a valid string
+//     - assume ASCII character set with US-Latin alphabetic characters
+//   - rules
+//     - return false if any alpha character in "string" is lowercase
+//     - return true otherwise
+//   - other error conditions:
+//     - return true is "string" does not contain any alpha characters
+//     - return true is "string" is empty
+//
+// Examples/Test cases:
+//   - Happy path tests
+//     - isUppercase('t')          -> false
+//     - isUppercase('T')          -> true
+//     - isUppercase('Four Score') -> false
+//     - isUppercase('four score') -> false
+//     - isUppercase('FOUR SCORE') -> true
+//     - isUppercase('4SCORE!')    -> true
+//   - Edge case tests
+//     - isUppercase('')           -> true
+//     - isUppercase('123!')       -> true
+//
+// Data structure
+//   - inputs: String
+//   - rules: Array of characters
+//   - outputs: Boolean
+//
+// Algorithm
+//   - split "string" into Array of characters
+//   - return false is any character in "alphas" is lowercase
+//   - return true
+
+function isUppercase(string) {
+  return string.split('').every(
+    function isLower(character) {
+      return character < 'a' || character > 'z';
+    }
+  );
+}
+
+// test cases
+/* global show, log, theEnd */
+log(isUppercase('t'),          false);
+log(isUppercase('T'),          true);
+log(isUppercase('Four Score'), false);
+log(isUppercase('four score'), false);
+log(isUppercase('FOUR SCORE'), true);
+log(isUppercase('4SCORE!'),    true);
+log(isUppercase(''),           true);
+log(isUppercase('123!'),       true);
+theEnd();
+      </script>
+    </pre>
+  </body>
+</html>
